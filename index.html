@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Volume Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 550px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+
+    .form-group select {
+      width: 100%;
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .form-group button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      background-color: #e9e9e9;
+      padding: 10px;
+      border-radius: 3px;
+    }
+
+    .result::before {
+      content: 'Result: ';
+      font-weight: normal;
+    }
+
+    .formulas {
+      margin-top: 20px;
+    }
+
+    .formulas h3 {
+      margin-bottom: 10px;
+    }
+
+    .formulas p {
+      margin-bottom: 5px;
+    }
+
+    .formulas p strong {
+      font-weight: bold;
+    }
+
+    .formulas p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Hover effects */
+    .form-group input:hover,
+    .form-group select:hover {
+      border-color: #999;
+    }
+
+    .form-group button:hover {
+      background-color: #45a049;
+    }
+
+    .form-group button:active {
+      background-color: #3d8e41;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Volume Converter</h2>
+    <form onsubmit="event.preventDefault(); convert();">
+      <div class="form-group">
+        <label for="inputValue">Enter value:</label>
+        <input type="number" id="inputValue" placeholder="Value" required>
+      </div>
+      <div class="form-group">
+        <label for="fromUnit">From:</label>
+        <select id="fromUnit" required>
+          <option value="liters">Liters</option>
+          <option value="gallons">Gallons</option>
+          <option value="milliliters">Milliliters</option>
+          <option value="cubicMeters">Cubic Meters</option>
+          <option value="fluidOunces">Fluid Ounces</option>
+          <option value="cubicFeet">Cubic Feet</option>
+          <option value="cubicInches">Cubic Inches</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="toUnit">To:</label>
+        <select id="toUnit" required>
+          <option value="liters">Liters</option>
+          <option value="gallons">Gallons</option>
+          <option value="milliliters">Milliliters</option>
+          <option value="cubicMeters">Cubic Meters</option>
+          <option value="fluidOunces">Fluid Ounces</option>
+          <option value="cubicFeet">Cubic Feet</option>
+          <option value="cubicInches">Cubic Inches</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="submit">Convert</button>
+      </div>
+    </form>
+    <div class="result" id="result"></div>
+    <div class="formulas">
+      <h3>Conversion Formulas:</h3>
+      <p><strong>Liters to Gallons:</strong> Gallons = Liters * 0.264172</p>
+      <p><strong>Liters to Milliliters:</strong> Milliliters = Liters * 1000</p>
+      <p><strong>Liters to Cubic Meters:</strong> Cubic Meters = Liters * 0.001</p>
+      <p><strong>Gallons to Liters:</strong> Liters = Gallons * 3.78541</p>
+      <p><strong>Gallons to Fluid Ounces:</strong> Fluid Ounces = Gallons * 128</p>
+      <p><strong>Gallons to Cubic Feet:</strong> Cubic Feet = Gallons / 7.48052</p>
+      <p><strong>Cubic Meters to Liters:</strong> Liters = Cubic Meters * 1000</p>
+      <p><strong>Cubic Meters to Cubic Feet:</strong> Cubic Feet = Cubic Meters * 35.3147</p>
+      <p><strong>Cubic Inches to Liters:</strong> Liters = Cubic Inches * 0.0163871</p>
+      <p><strong>Cubic Feet to Cubic Meters:</strong> Cubic Meters = Cubic Feet / 35.3147</p>
+    </div>
+  </div>
+
+  <script>
+    function convert() {
+      var fromUnit = document.getElementById('fromUnit').value;
+      var toUnit = document.getElementById('toUnit').value;
+      var inputValue = parseFloat(document.getElementById('inputValue').value);
+      var result;
+
+      if (fromUnit === 'liters' && toUnit === 'gallons') {
+        result = inputValue * 0.264172;
+      } else if (fromUnit === 'liters' && toUnit === 'milliliters') {
+        result = inputValue * 1000;
+      } else if (fromUnit === 'liters' && toUnit === 'cubicMeters') {
+        result = inputValue * 0.001;
+      } else if (fromUnit === 'gallons' && toUnit === 'liters') {
+        result = inputValue * 3.78541;
+      } else if (fromUnit === 'gallons' && toUnit === 'fluidOunces') {
+        result = inputValue * 128;
+      } else if (fromUnit === 'gallons' && toUnit === 'cubicFeet') {
+        result = inputValue / 7.48052;
+      } else if (fromUnit === 'cubicMeters' && toUnit === 'liters') {
+        result = inputValue * 1000;
+      } else if (fromUnit === 'cubicMeters' && toUnit === 'cubicFeet') {
+        result = inputValue * 35.3147;
+      } else if (fromUnit === 'cubicInches' && toUnit === 'liters') {
+        result = inputValue * 0.0163871;
+      } else if (fromUnit === 'cubicFeet' && toUnit === 'cubicMeters') {
+        result = inputValue / 35.3147;
+      } else {
+        result = inputValue; // No conversion needed
+      }
+
+      document.getElementById('result').textContent = inputValue + ' ' + fromUnit + ' = ' + result.toFixed(2) + ' ' + toUnit;
+    }
+  </script>
+</body>
+</html>
